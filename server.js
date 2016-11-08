@@ -48,10 +48,8 @@ app.get('/api/todos/search', function search(req, res) {
    * query in the request. COMPLETE THIS ENDPOINT LAST.
    */
 });
-
+    /* ---- Working ---- */
 app.get('/api/todos', function index(req, res) {
-  // var toJsonString = JSON.stringify(todos);
-  console.log(todos);
   res.json({todos: todos});
 });
 
@@ -61,10 +59,13 @@ app.post('/api/todos', function create(req, res) {
    */
 });
 
+    /* ---- Working ---- */
 app.get('/api/todos/:id', function show(req, res) {
-  /* This endpoint will return a single todo with the
-   * id specified in the route parameter (:id)
-   */
+   var targetId = parseInt(req.params.id);
+   var foundTodo = todos.filter(function (todo) {
+     return todo._id == targetId;
+   })[0];
+   res.json(foundTodo);
 });
 
 app.put('/api/todos/:id', function update(req, res) {
@@ -78,6 +79,7 @@ app.delete('/api/todos/:id', function destroy(req, res) {
   /* This endpoint will delete a single todo with the
    * id specified in the route parameter (:id) and respond
    * with success.
+   * Note to self, should use splice
    */
 });
 
