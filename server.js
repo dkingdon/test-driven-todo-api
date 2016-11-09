@@ -54,9 +54,10 @@ app.get('/api/todos', function index(req, res) {
 });
 
 app.post('/api/todos', function create(req, res) {
-  /* This endpoint will add a todo to our "database"
-   * and respond with the newly created todo.
-   */
+   var newTodoItem = req.body; // Didnt know what this was. Had to look it up after seeing it on the cheat sheet.
+   newTodoItem._id = todos[todos.length -1]._id +1;
+   todos.push(newTodoItem);
+   res.json(newTodoItem); //Still unclear of when to use {} and when we dont have to. 
 });
 
     /* ---- Working ---- */
