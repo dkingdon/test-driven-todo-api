@@ -53,11 +53,12 @@ app.get('/api/todos', function index(req, res) {
   res.json({todos: todos});
 });
 
+    /* ---- Working ---- */
 app.post('/api/todos', function create(req, res) {
    var newTodoItem = req.body; // Didnt know what this was. Had to look it up after seeing it on the cheat sheet.
    newTodoItem._id = todos[todos.length -1]._id +1;
    todos.push(newTodoItem);
-   res.json(newTodoItem); //Still unclear of when to use {} and when we dont have to. 
+   res.json(newTodoItem); //Still unclear of when to use {} and when we dont have to.
 });
 
     /* ---- Working ---- */
@@ -73,7 +74,25 @@ app.put('/api/todos/:id', function update(req, res) {
   /* This endpoint will update a single todo with the
    * id specified in the route parameter (:id) and respond
    * with the newly updated todo.
+    -- get new values and store in variable
+
+    -- find object with speficied _id
+              look through array, find id
+    -- replace task: and description: with new data
+
+    -- send back object with new data
    */
+  //  var targetId = parseInt(req.params.id); // successfully grabs
+      // var result;
+      //   for (var i = 0; i < todos.length-1; i++) {
+      //       if (todos[i]._id === targetId) {
+      //           result = todos[i];
+      //       }
+      //   }
+      //
+      //   console.log(result);
+
+
 });
 
 app.delete('/api/todos/:id', function destroy(req, res) {
@@ -82,6 +101,14 @@ app.delete('/api/todos/:id', function destroy(req, res) {
    * with success.
    * Note to self, should use splice
    */
+   var targetId = parseInt(req.params.id); // successfully grabs
+  //  var result;
+    for (var i = 0; i < todos.length-1; i++) {
+        if (todos[i]._id === targetId) {
+            todos.splice(i, 1);
+        }
+    }
+    res.json(todos);
 });
 
 /**********
